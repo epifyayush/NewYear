@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mystic Falls Archive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #bfa76a;
+  --ink: #e4dfd5;
+  --bg: #020303;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0b0e0d, var(--bg));
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
+}
+
+/* Fog */
+.fog {
+  position: fixed;
+  width: 300%;
+  height: 300%;
+  background: url("https://i.imgur.com/cQJY8pN.png");
+  opacity: 0.14;
+  animation: drift 180s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* FULLSCREEN INTRO */
+#introScreen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.introText {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-align: center;
+  max-width: 800px;
+  padding: 40px;
+}
+
+/* Main Panel */
+.panel {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  width: 90%;
+  margin: auto;
+  margin-top: 12vh;
+  background: rgba(8,10,9,0.88);
+  border: 1px solid rgba(191,167,106,0.35);
+  padding: 55px 45px;
+  box-shadow: 0 0 70px rgba(0,0,0,0.95);
+  text-align: center;
+  display: none;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 1.35rem;
+  color: #d9d3c6;
+  min-height: 1.6em;
+}
+
+/* Input */
+input {
+    margin-top: 25px;
+    width: 80%;
+    padding: 12px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(180, 160, 120, 0.5);
+    color: #e7e1d6;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    text-align: center;
+    outline: none;
+}
+
+button {
+  margin-top: 35px;
+  padding: 12px 40px;
+  background: transparent;
+  border: 1px solid rgba(191,167,106,0.7);
+  color: var(--ink);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(191,167,106,0.18);
+}
+
+/* FULLSCREEN VERIFICATION */
+#verifyScreen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.glitch {
+  font-family: monospace;
+  font-size: 1.15rem;
+  color: var(--gold);
+  text-align: center;
+  animation: glitchFlicker 0.12s infinite;
+}
+
+/* Aggressive glitch */
+@keyframes glitchFlicker {
+  0% { transform: translate(0); opacity: 1; }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); opacity: 0.8; }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -2px); opacity: 0.9; }
+  100% { transform: translate(0); opacity: 1; }
+}
+
+.error {
+  margin-top: 25px;
+  color: #b84a4a;
+  font-family: monospace;
+}
+</style>
+</head>
+
+<body>
+
+<div class="fog"></div>
+
+<!-- INTRO -->
+<div id="introScreen">
+  <div class="introText" id="introText"></div>
+</div>
+
+<!-- MAIN -->
+<div class="panel" id="panel">
+  <h1>Mystic Falls Archive</h1>
+
+  <p id="l1"></p>
+  <p id="l2"></p>
+  <p id="l3"></p>
+
+  <input type="text" id="nameInput" placeholder="State your name">
+  <br>
+  <button onclick="verify()">Begin Verification</button>
+
+  <div class="error" id="error"></div>
+</div>
+
+<!-- VERIFICATION -->
+<div id="verifyScreen">
+  <div class="glitch" id="verifyText"></div>
+</div>
+
+<script>
+const correctName = "nabanita das";
+
+/* BADASS INTRO TEXT */
+const introLines = [
+  "THIS ARCHIVE IS NOT A WELCOME.",
+  "IT IS A JUDGEMENT.",
+  "ONLY THOSE BOUND TO MYSTIC FALLS MAY PROCEED.",
+  "ONLY TRUE DIE HARD FAN NAME WILL BE ACCEPTED..",
+  "WE WILL KNOW IF YOU LIE.. TRY IT"
+];
+
+let introLine = 0, introChar = 0;
+const introBox = document.getElementById("introText");
+
+function typeIntro() {
+  if (introLine >= introLines.length) {
+    setTimeout(() => {
+      document.getElementById("introScreen").style.display = "none";
+      document.getElementById("panel").style.display = "block";
+      typeMain();
+    }, 1200);
+    return;
+  }
+
+  introBox.textContent += introLines[introLine][introChar];
+  introChar++;
+
+  if (introChar === introLines[introLine].length) {
+    introBox.textContent += "\n\n";
+    introLine++;
+    introChar = 0;
+    setTimeout(typeIntro, 900);
+  } else {
+    setTimeout(typeIntro, 70);
+  }
+}
+
+/* MAIN TEXT */
+const mainLines = [
+  "This archive opens only for the devoted.",
+  "Names are not identifiers here — they are proof.",
+  "State yours, and be measured. Enter wrong name at first and check... then enter your Full name",
+  
+];
+
+let ml = 0, mc = 0;
+
+function typeMain() {
+  if (ml >= mainLines.length) return;
+  const el = document.getElementById("l" + (ml + 1));
+  el.textContent += mainLines[ml][mc];
+  mc++;
+
+  if (mc === mainLines[ml].length) {
+    ml++; mc = 0;
+    setTimeout(typeMain, 700);
+  } else {
+    setTimeout(typeMain, 45);
+  }
+}
+
+typeIntro();
+
+/* VERIFY */
+function verify() {
+  const name = document.getElementById("nameInput").value.trim().toLowerCase();
+  if (name !== correctName) intruder();
+  else ritual();
+}
+
+function intruder() {
+  let c = 5;
+  const err = document.getElementById("error");
+  const t = setInterval(() => {
+    err.textContent = `INTRUDER DETECTED... SYSTEM PURGE IN ${c}`;
+    c--;
+    if (c < 0) {
+      clearInterval(t);
+      location.reload();
+    }
+  }, 1000);
+}
+
+function ritual() {
+  document.getElementById("panel").style.display = "none";
+  document.getElementById("verifyScreen").style.display = "flex";
+
+  const steps = [
+    "INITIALIZING BLOOD SEAL…",
+    "SUMMONING SALVATORE BROTHERS…",
+    "CONTACTING KLAUS MIKAELSON…",
+    "CONFIRMING ORIGINAL AUTHORITY…",
+    "VERIFYING HUMANITY SWITCH…",
+    "DNA ACCEPTED.",
+    "ACCESS GRANTED."
+  ];
+
+  let i = 0;
+  const box = document.getElementById("verifyText");
+
+  const seq = setInterval(() => {
+    box.innerHTML += steps[i] + "<br>";
+    i++;
+    if (i === steps.length) {
+      clearInterval(seq);
+      setTimeout(() => {
+        box.innerHTML += "<br><button onclick='enter()'>ENTER MYSTIC FALLS</button>";
+      }, 1400);
+    }
+  }, 1000);
+}
+
+function enter() {
+  window.location.href = "secondpage.html";
+}
+
+</script>
+
+</body>
+</html>

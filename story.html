@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sealed Pages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0705;
+  --paper: rgba(28,22,16,0.92);
+  --ink: #e6dcc8;
+  --muted: #c1b59e;
+  --gold: #bfa76a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1b140d, var(--bg));
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+.story-btn{
+  display:inline-block;
+  padding:14px 28px;
+  font-family:"Cinzel", serif;
+  letter-spacing:1px;
+  color:#efe7d8;
+  text-decoration:none;
+  border:1px solid rgba(200,170,110,0.25);
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  transition: all 0.25s ease;
+}
+
+.story-btn:hover{
+  transform: translateY(-2px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.45);
+  background:rgba(200,170,110,0.05);
+}
+
+/* Fog */
+.fog {
+  position: fixed;
+  width: 300%;
+  height: 300%;
+  background: url("fog.avif");
+  opacity: 0.07;
+  animation: drift 260s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Page */
+.page {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 100px auto;
+  padding: 80px 70px;
+  background: var(--paper);
+  border: 1px solid rgba(191,167,106,0.25);
+  box-shadow: 0 0 120px rgba(0,0,0,0.95);
+}
+
+/* Header */
+.page h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.divider {
+  width: 90px;
+  height: 1px;
+  background: rgba(191,167,106,0.5);
+  margin: 0 auto 50px;
+}
+
+/* Story text */
+.story p {
+  font-size: 1.4rem;
+  line-height: 1.9;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+
+/* Fade-in */
+.page {
+  opacity: 0;
+  animation: fadeIn 2.5s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .page {
+    padding: 50px 35px;
+    margin: 60px 20px;
+  }
+  .page h1 {
+    font-size: 2.2rem;
+  }
+  .story p {
+    font-size: 1.25rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fog"></div>
+
+<div class="page">
+
+  <h1> Story of Harry </h1>
+  <div class="divider"></div>
+
+  <div class="story">
+
+    <p>It is a story of the maker of this website... For convenience, let’s call the maker of this website Harry.</p>
+
+    <p>Harry is a stupid boy.<br>
+    Harry is dumb.<br>
+    And Harry has many issues.</p>
+
+    <p>One of the biggest is this: attachment.</p>
+
+    <p>Harry gets attached to everything—too quickly, too deeply, and without knowing how to stop. He has very few real friends in his life, yet he tries his hardest to be the best character in everyone else’s story. Somewhere along the way, Harry convinced himself that if he tried hard enough, if he stayed kind enough, if he stayed available enough, he could never be replaced.</p>
+
+    <p>That, too, is one of the many dumb things Harry believes.</p>
+
+    <p>Harry is afraid—constantly—that people will leave him if he ever acts wrong. Even when they are wrong. Even when they hurt him first. Harry stays quiet, because losing people scares him more than losing his self-respect.</p>
+
+    <p>Harry likes very few things in life. And because those things are few, he holds onto them tightly. Too tightly. He fears that if he says the wrong thing, does the wrong thing, or becomes even slightly inconvenient, those things will slip away. And because Harry is dumb, he often acts without thinking—acts driven by fear, not reason.</p>
+
+    <p>Harry makes effort.<br>
+    Harry accepts disrespect.<br>
+    Harry goes back again and again, trying to make things work.</p>
+    
+    <p>Because Harry is dumb.</p>
+
+    <p>There are 8 planets, 7 continents, 204 countries, 7 seas, and 7,594,000,000 people in this world,<br>
+      and Harry still likes the one person who does not care.<br>
+      For Harry, that one person matters more than anything else in the world. More than logic. More than self-respect. More than peace. Something as small as a single notification from that person can make him feel like the happiest person alive.</p>
+      
+
+    <p>Because Harry is stupid.</p>
+
+    <p>What Harry believes is bare minimum—checking in, remembering details, showing up, caring—is what that person sees as suffocating, manipulative, creepy, or too much. What Harry calls loyalty, they call simping. What Harry calls care, they call pressure.<br></p>
+    <p>Harry doesn’t understand that difference.<br>
+      Because Harry is dumb.</p>
+
+    <p>Harry doesn’t understand boundaries very well. When someone tries to push him away, he doesn’t step back—he steps closer. Not because he wants to cross lines, but because he cannot walk away from things he cares about. Harry accepts cold words. He accepts loud silence. He still shows up even when people give him every reason not to.</p>
+
+
+    <p>Harry texts repeatedly.<br>
+    He reassures.<br>
+    He asks if they are annoyed.<br>
+    He asks if they need someone to talk to.</p>
+
+    <p>Harry thinks—wrongly—that because he needs these things, others might too.</p>
+
+    <p>He asks about their health.<br>
+    He checks if they are okay.<br>
+    He remembers the smallest details about them.</p>
+
+    <p>Not because he has to.<br>
+    But because he cares.</p>
+
+    <p>Harry doesn’t love out of convenience. He loves from a place of commitment—whether it is friends, family, or someone he loves. And once again, Harry is stupid enough to give everything, even when it costs him his peace.</p>
+
+    <p>He wastes his time.<br>
+    He refuses to understand when to stop.<br>
+    He chooses to fight to stay in people’s lives—even when they give him every excuse to leave.</p>
+
+    <p>Because Harry is stupid.</p>
+
+    <p>Maybe Harry needs therapy. Maybe Harry always ends up annoying the people who don’t want him in their lives. He texts constantly, thinking he is already a burden—without realizing that his fear of being unwanted only pushes people further away.</p>
+
+    <p>Harry is dumb.<br>
+    Harry is stupid.<br>
+    Harry is sensitive.</p>
+
+    <p>Harry has made a decision to change.</p>
+
+    <p>He has promised himself that he will not care so deeply. That he will not try to stay and fix things with people who are annoyed, distant, or who no longer want him around. He has made this promise many times before—and failed every single time.</p>
+
+    <p>Harry doesn’t care about most things.<br>
+    But when he does care, he cares too much.</p>
+
+    <p>And that is where he gets hurt.</p>
+
+    <p>Harry gets hurt when he gives what he himself wants—care, concern, presence—and realizes it is not needed. He thinks he will be allowed to listen to their problems, their happiness, their worries. He thinks—stupidly—that he matters to them, even a little.</p>
+
+    <p>Harry did not make this website to pressure anyone.<br>
+    He did not make it to demand love or attention.</p>
+
+    <p>He made it out of friendship.</p>
+
+    <p>And, as always, Harry is dumb.<br>
+    And sensitive.</p>
+
+    <p>So if you wish him Happy New Year, know this: Harry is dumb enough to believe that if that one person wishes him, the year will truly be a good one.</p>
+
+    <p>Anyway—<br>
+    Here is the website.</p>
+
+    <p>Harry would love it if you went through it.<br>
+    Or you can just ghost him.</p>
+
+    <p>Because, in the end, dumb Harry is still too dumb—and too soft—for this world.</p>
+
+
+  <div style="text-align:center; margin:60px 0;">
+  <a href="firstpage4.html" class="story-btn">
+    Continue
+  </a>
+</div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mystic Falls</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #bfa76a;
+  --ink: #e4dfd5;
+  --bg: #040505;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0d1110, var(--bg));
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
+}
+
+/* Fog */
+.fog {
+  position: fixed;
+  width: 300%;
+  height: 300%;
+  background: url("https://i.imgur.com/cQJY8pN.png");
+  opacity: 0.10;
+  animation: drift 220s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Main container */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 90%;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 1.4rem;
+  color: #d8d2c4;
+  margin-bottom: 25px;
+  line-height: 1.8;
+}
+
+/* Sound toggle */
+.sound-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(191,167,106,0.6);
+  color: var(--ink);
+  cursor: pointer;
+  z-index: 3;
+}
+
+.sound-btn:hover {
+  background: rgba(191,167,106,0.15);
+}
+
+/* Continue button */
+.continue {
+  margin-top: 50px;
+  padding: 12px 42px;
+  background: transparent;
+  border: 1px solid rgba(191,167,106,0.7);
+  color: var(--ink);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.continue:hover {
+  background: rgba(191,167,106,0.18);
+}
+</style>
+</head>
+
+<body>
+
+<div class="fog"></div>
+
+<!-- Ambient Sound -->
+<audio id="ambient" loop>
+  <!-- Replace this with your own ambient file if you want -->
+  <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_51cba4f1e3.mp3" type="audio/mpeg">
+</audio>
+
+<button class="sound-btn" onclick="toggleSound()">🔊 SOUND</button>
+
+<div class="container">
+  <h1>Mystic Falls</h1>
+
+  <p>
+    The gates are closed behind you now.
+  </p>
+
+  <p>
+    Here, the night is quieter.  
+    The past does not chase — it watches from a distance.
+  </p>
+
+  <p>
+    You are allowed to rest here.  
+    Even monsters once needed a place to breathe.
+  </p>
+
+  <a href="DamonStephan/hhh.html">
+  <button class="continue">
+    Continue
+  </button>
+</a>
+
+</div>
+
+<script>
+let playing = false;
+const audio = document.getElementById("ambient");
+
+function toggleSound() {
+  if (!playing) {
+    audio.volume = 0.25;
+    audio.play();
+    playing = true;
+  } else {
+    audio.pause();
+    playing = false;
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  body{
+    margin:0;
+    min-height:100vh;
+    background: radial-gradient(circle at top, #0b0b0b 0%, #050505 40%, #020202 100%);
+    color:#efe7d8;
+    font-family:"Playfair Display", serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .container{
+    max-width:900px;
+    padding:60px 50px;
+    text-align:center;
+  }
+
+  .line{
+    font-size:20px;
+    line-height:1.9;
+    margin:18px 0;
+    opacity:0.98;
+  }
+
+  .damon{
+    font-family:"Cinzel", serif;
+    color:#c6a86f;
+    letter-spacing:1px;
+    font-size:18px;
+  }
+
+  .divider{
+    height:30px;
+  }
+
+  .final{
+    margin-top:30px;
+  }
+
+  @media(max-width:900px){
+    .container{padding:40px 24px;}
+    .line{font-size:18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="content"></div>
+
+<script>
+const textBlocks = [
+  { text: "Harry asked me to say this.", cls:"damon" },
+  { text: "Not because Harry couldn’t say it himself.", cls:"damon" },
+  { text: "But because Harry knows you listen to me.", cls:"damon" },
+
+  { text: "Harry knows you like Damon very much.", cls:"damon" },
+  { text: "So Harry thought… if the words came from me, you’d hear them without feeling cornered.", cls:"damon" },
+
+  { text: "I’m not here to dramatize it.", cls:"damon" },
+  { text: "I’m not here to add meaning that isn’t there.", cls:"damon" },
+
+  { text: "I’m just the messenger.", cls:"damon" },
+  { text: "This is Harry.", cls:"damon" },
+  { text: "And this is what Harry wanted you to hear.", cls:"damon" },
+
+  { divider:true },
+
+  { text:
+`Happy New Year.
+
+I hope this year is gentle with you — in ways you don’t have to explain to anyone. I hope you find moments that feel like quiet wins, and days that don’t ask too much of you.
+
+The website wasn’t meant to be anything important. You didn’t ask for it, and it wasn’t necessary. It was just my way of wishing you, a little differently. I enjoyed making it — genuinely. Somewhere along the way it became something else, not exactly what I planned, but that’s on me. I’m still learning.
+
+There’s no expectation tied to it. No meaning you need to carry forward.
+
+I don’t want anything from you — not explanations, not reassurance. Just one small thing, if you’re okay with it. Your promise that you’ll still be here when the next New Year comes around. That’s all.
+
+However this year unfolds, I hope it’s kind to you.
+
+Take care...
+
+And a VERY HAPPY NEW YEAR 2026 NABANITA... 
+
+YAYAYYYY`,
+    cls:"line final"
+  }
+];
+
+const container = document.getElementById("content");
+let speed = 38;
+
+function typeLine(text, cls){
+  return new Promise(resolve=>{
+    const p = document.createElement("div");
+    p.className = "line " + (cls || "");
+    container.appendChild(p);
+    let i = 0;
+
+    function type(){
+      if(i < text.length){
+        p.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        i++;
+        setTimeout(type, speed);
+      } else {
+        resolve();
+      }
+    }
+    type();
+  });
+}
+
+async function start(){
+  for(const block of textBlocks){
+    if(block.divider){
+      const d = document.createElement("div");
+      d.className = "divider";
+      container.appendChild(d);
+      await new Promise(r=>setTimeout(r,800));
+    } else {
+      await typeLine(block.text, block.cls);
+      await new Promise(r=>setTimeout(r,700));
+    }
+  }
+}
+
+start();
+</script>
+
+</body>
+</html>
