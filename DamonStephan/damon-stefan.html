@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mystic Falls — New Year</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050504;
+  --ink:#e6dcc8;
+  --gold:#c8b27a;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  height:100vh;
+  background:radial-gradient(circle at top,#111,var(--bg));
+  font-family:'Cormorant Garamond',serif;
+  color:var(--ink);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* ===== SCENE ===== */
+.scene{
+  width:90%;
+  max-width:1100px;
+  display:grid;
+  grid-template-columns:1fr 2fr 1fr;
+  align-items:flex-end;
+  gap:30px;
+}
+
+/* ===== CHARACTERS ===== */
+.character{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  opacity:0;
+  transition:opacity 2s ease;
+}
+
+.character img{
+  max-height:420px;      /* ✔ safe height */
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
+  filter:grayscale(15%) brightness(0.85);
+}
+
+/* ===== DIALOGUE ===== */
+.dialogue-box{
+  text-align:center;
+  min-height:320px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+.speaker{
+  font-family:'Cinzel',serif;
+  font-size:0.9rem;
+  letter-spacing:2px;
+  color:var(--gold);
+  margin-bottom:12px;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+
+.line{
+  font-size:1.4rem;
+  line-height:1.9;
+  margin-bottom:18px;
+  opacity:0;
+  transition:opacity 1.6s ease;
+}
+
+/* ===== BUTTON ===== */
+.action{
+  margin-top:40px;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+
+button{
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--ink);
+  padding:14px 42px;
+  font-family:'Cinzel',serif;
+  font-size:1rem;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:all 0.4s ease;
+}
+
+button:hover{
+  background:rgba(200,178,122,0.08);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .scene{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .character{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+  <!-- STEFAN -->
+  <div class="character" id="stefan">
+    <img src="stefan.png" alt="Stefan Salvatore">
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="dialogue-box">
+    <div class="speaker" id="speaker"></div>
+    <div class="line" id="text"></div>
+
+    <div class="action" id="action">
+      <a href="../Damon Game/damon-game.html">
+        <button>I’m still here</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- DAMON -->
+  <div class="character" id="damon">
+    <img src="damon.png" alt="Damon Salvatore">
+  </div>
+
+</div>
+
+<script>
+const dialogue = [
+  { who:"Damon", text:"Well… congratulations. It’s officially a new year." },
+  { who:"Stefan", text:"You don’t sound thrilled." },
+  { who:"Damon", text:"I’m ecstatic. Nothing screams a fresh start like dragging last year’s mess into January." },
+  { who:"Stefan", text:"Last year tested everyone." },
+  { who:"Damon", text:"Tested? Please. It ambushed people. Pulled the rug out. Then laughed about it." },
+  { who:"Stefan", text:"Some people didn’t get what they deserved." },
+  { who:"Damon", text:"Some people got more than they could carry." },
+  { who:"Stefan", text:"You don’t just get over that." },
+  { who:"Damon", text:"Nope. But apparently, you’re supposed to smile, make resolutions, and pretend the clock fixed everything." },
+  { who:"Stefan", text:"It didn’t." },
+  { who:"Damon", text:"I know." },
+  { who:"Damon", text:"Still… if you’re standing here after all of that…" },
+  { who:"Stefan", text:"Then you survived." },
+  { who:"Damon", text:"Yeah. And whether you like it or not — that counts." }
+];
+
+let index = 0;
+const speaker = document.getElementById("speaker");
+const text = document.getElementById("text");
+const action = document.getElementById("action");
+const damon = document.getElementById("damon");
+const stefan = document.getElementById("stefan");
+
+window.onload = () => {
+  damon.style.opacity = 1;
+  stefan.style.opacity = 1;
+  showLine();
+};
+
+function showLine(){
+  if(index >= dialogue.length){
+    setTimeout(()=> action.style.opacity = 1, 1400);
+    return;
+  }
+
+  speaker.style.opacity = 0;
+  text.style.opacity = 0;
+
+  setTimeout(()=>{
+    speaker.innerText = dialogue[index].who;
+    text.innerText = dialogue[index].text;
+    speaker.style.opacity = 1;
+    text.style.opacity = 1;
+    index++;
+    setTimeout(showLine, 3000);  // ✔ readable pacing
+  }, 900);
+}
+</script>
+
+</body>
+</html>
